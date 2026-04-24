@@ -35,19 +35,30 @@ export const Fonts = Platform.select({
     serif: 'ui-serif',
     /** iOS `UIFontDescriptorSystemDesignRounded` */
     rounded: 'ui-rounded',
+    /** Rounded system font reads more naturally for Vietnamese display text. */
+    display: 'ui-rounded',
     /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: 'ui-monospace',
   },
-  default: {
-    sans: 'normal',
+  android: {
+    sans: 'sans-serif',
     serif: 'serif',
-    rounded: 'normal',
+    rounded: 'sans-serif-medium',
+    display: 'sans-serif-medium',
+    mono: 'monospace',
+  },
+  default: {
+    sans: 'sans-serif',
+    serif: 'serif',
+    rounded: 'sans-serif-medium',
+    display: 'sans-serif-medium',
     mono: 'monospace',
   },
   web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    sans: "'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
     serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
+    rounded: "'Be Vietnam Pro', 'SF Pro Rounded', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    display: "'Be Vietnam Pro', 'Aptos', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
     mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
