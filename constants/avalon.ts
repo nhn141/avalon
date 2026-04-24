@@ -37,37 +37,37 @@ export const ROLE_DEFINITIONS: Record<RoleId, RoleDefinition> = {
     id: 'merlin',
     name: 'Merlin',
     alignment: 'good',
-    summary: 'Thuộc phe tốt, biết được tất cả phe ác trừ Mordred',
+    summary: 'Thuộc phe Thiện, biết được tất cả phe Ác trừ Mordred',
   },
   percival: {
     id: 'percival',
     name: 'Percival',
     alignment: 'good',
-    summary: 'Thuộc phe tốt, thấy Merlin (tốt) và Morgana (ác), nhưng không phân biệt được',
+    summary: 'Thuộc phe Thiện, thấy Merlin (Thiện) và Morgana (Ác), nhưng không phân biệt được',
   },
   'loyal-servant': {
     id: 'loyal-servant',
     name: 'Dân đen',
     alignment: 'good',
-    summary: 'Thuộc phe tốt',
+    summary: 'Thuộc phe Thiện',
   },
   assassin: {
     id: 'assassin',
     name: 'Sát thủ',
     alignment: 'evil',
-    summary: 'Thuộc phe ác, khi thua có thể lật kèo bằng cách giết Merlin',
+    summary: 'Thuộc phe Ác, khi thua có thể lật kèo bằng cách giết Merlin',
   },
   morgana: {
     id: 'morgana',
     name: 'Morgana',
     alignment: 'evil',
-    summary: 'Thuộc phe ác, đóng giả Merlin để lừa Percival',
+    summary: 'Thuộc phe Ác, đóng giả Merlin để lừa Percival',
   },
   mordred: {
     id: 'mordred',
     name: 'Mordred',
     alignment: 'evil',
-    summary: 'Thuộc phe ác, nhưng Merlin không biết',
+    summary: 'Thuộc phe Ác, nhưng Merlin không biết',
   },
 };
 
@@ -161,7 +161,7 @@ export function getPlayerBrief(player: GamePlayer, players: GamePlayer[]) {
 
     intel.push(
       visibleEvil.length
-        ? `${visibleEvil.map((candidate) => candidate.name).join(', ')} thuộc phe ác`
+        ? `${visibleEvil.map((candidate) => candidate.name).join(', ')} thuộc phe Ác`
         : 'Bạn không thấy bất cứ ai.'
     );
   }
@@ -183,11 +183,11 @@ export function getPlayerBrief(player: GamePlayer, players: GamePlayer[]) {
         getAlignment(candidate.roleId) === 'evil'
     );
 
-    intel.push(allies.length ? `Đồng đội chung phe ác: ${allies.map((ally) => ally.name).join(', ')}` : 'Bạn là Evil duy nhất.');
+    intel.push(allies.length ? `Đồng đội chung phe Ác: ${allies.map((ally) => ally.name).join(', ')}` : 'Bạn là Evil duy nhất.');
   }
 
   if (player.roleId === 'mordred') {
-    intel.push('Merlin không biết bạn là phe ác');
+    intel.push('Merlin không biết bạn là phe Ác');
   }
 
   return {

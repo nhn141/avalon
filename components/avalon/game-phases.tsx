@@ -371,19 +371,19 @@ function AssassinationPickCard({ controller }: { controller: AvalonGameControlle
     <Card highlight>
       <SectionTitle
         title="Tìm Merlin"
-        body={`${assassin ? `${assassin.name}` : ''} chọn một mục tiêu để ám sát. Nếu chọn đúng Merlin, phe ác sẽ thắng.`}
+        body={`${assassin ? `${assassin.name}` : ''} chọn một mục tiêu để ám sát. Nếu chọn đúng Merlin, phe Ác sẽ thắng.`}
       />
       <View style={styles.stack}>
         {game.players
           .filter((player) => getAlignment(player.roleId) === 'good')
           .map((player) => (
-          <SelectableRow
-            key={player.id}
-            title={player.name}
-            subtitle=""
-            selected={false}
-            onPress={() => pickAssassinationTarget(player.id)}
-          />
+            <SelectableRow
+              key={player.id}
+              title={player.name}
+              subtitle=""
+              selected={false}
+              onPress={() => pickAssassinationTarget(player.id)}
+            />
           ))}
       </View>
     </Card>
@@ -399,7 +399,7 @@ function GameOverCard({ controller }: { controller: AvalonGameController }) {
 
   return (
     <Card>
-      <SectionTitle title={game.winner === 'good' ? 'Phe tốt thắng' : 'Phe ác thắng'} body={game.endReason} />
+      <SectionTitle title={game.winner === 'good' ? 'Phe Thiện thắng' : 'Phe Ác thắng'} body={game.endReason} />
       <View style={styles.stack}>
         {game.players.map((player) => {
           const role = getRole(player.roleId);
