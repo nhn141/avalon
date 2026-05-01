@@ -9,7 +9,7 @@ import {
   SectionTitle,
   SelectableRow,
 } from '@/components/avalon/ui';
-import { getAlignment, getFailThreshold, getPlayerBrief, getRole } from '@/constants/avalon';
+import { getAlignment, getAlignmentLabel, getFailThreshold, getPlayerBrief, getRole } from '@/constants/avalon';
 import type { AvalonGameController } from '@/hooks/use-avalon-game';
 
 export function GamePhasePanel({ controller }: { controller: AvalonGameController }) {
@@ -96,7 +96,7 @@ function RoleRevealCard({ controller }: { controller: AvalonGameController }) {
         <Text style={styles.secretRole}>{brief.roleName}</Text>
       </View>
       <Text style={[styles.secretTeam, brief.alignment === 'good' ? styles.goodText : styles.evilText]}>
-        {brief.alignment.toUpperCase()}
+        {getAlignmentLabel(brief.alignment)}
       </Text>
       <Text style={styles.secretSummary}>{brief.summary}</Text>
       <View style={styles.stack}>
@@ -125,7 +125,7 @@ function TeamProposalCard({ controller }: { controller: AvalonGameController }) 
   return (
     <Card>
       <SectionTitle
-        title="Chọn team"
+        title="Chọn đội"
         body={`${currentLeader?.name} là đội trưởng. Chọn ra ${currentQuestSize} người cho Quest ${game.questIndex + 1}.`}
       />
       <View style={styles.stack}>
@@ -135,7 +135,7 @@ function TeamProposalCard({ controller }: { controller: AvalonGameController }) 
             <SelectableRow
               key={player.id}
               title={player.name}
-              subtitle={selected ? 'Đang trong team' : 'Bấm vào để chọn'}
+              subtitle={selected ? 'Đang trong đội' : 'Bấm vào để chọn'}
               selected={selected}
               onPress={() => toggleTeamMember(index)}
             />
@@ -143,8 +143,8 @@ function TeamProposalCard({ controller }: { controller: AvalonGameController }) 
         })}
       </View>
       <View style={styles.modeMeta}>
-        <MetaPill label={`Selected ${game.proposedTeam.length}/${currentQuestSize}`} tone="accent" />
-        <MetaPill label={`Proposal ${game.rejectCount + 1}/5`} tone="gold" />
+        <MetaPill label={`Đã chọn: ${game.proposedTeam.length}/${currentQuestSize}`} tone="accent" />
+        <MetaPill label={`Số lần chọn: ${game.rejectCount + 1}/5`} tone="gold" />
       </View>
       <PrimaryButton
         label="Xác nhận"
@@ -165,12 +165,12 @@ function TeamVoteCard({ controller }: { controller: AvalonGameController }) {
   return (
     <Card>
       <SectionTitle
-        title="Team Vote"
+        title="Vote đội hình"
         body={`Đưa máy cho ${game.players[game.currentVoterIndex].name} để vote.`}
       />
       <View style={styles.modeMeta}>
         <MetaPill
-          label={`Team: ${game.proposedTeam.map((index) => game.players[index].name).join(', ')}`}
+          label={`Đội hình: ${game.proposedTeam.map((index) => game.players[index].name).join(', ')}`}
           tone="slate"
         />
       </View>
@@ -249,7 +249,7 @@ function MissionPromptCard({ controller }: { controller: AvalonGameController })
       />
       <View style={styles.modeMeta}>
         <MetaPill
-          label={`Team: ${game.proposedTeam.map((index) => game.players[index].name).join(', ')}`}
+          label={`Đội hình: ${game.proposedTeam.map((index) => game.players[index].name).join(', ')}`}
           tone="slate"
         />
         <MetaPill
@@ -312,7 +312,7 @@ function MissionResultPromptCard({ controller }: { controller: AvalonGameControl
       />
       <View style={styles.modeMeta}>
         <MetaPill label={`Quest ${game.questIndex + 1}`} tone="accent" />
-        <MetaPill label={`Team size: ${game.proposedTeam.length}`} tone="slate" />
+        <MetaPill label={`Số lượng thành viên: ${game.proposedTeam.length}`} tone="slate" />
       </View>
       <PrimaryButton label="Xem kết quả" onPress={revealMissionResult} />
     </Card>
@@ -412,7 +412,7 @@ function GameOverCard({ controller }: { controller: AvalonGameController }) {
                   styles.revealTeam,
                   role.alignment === 'good' ? styles.goodText : styles.evilText,
                 ]}>
-                {role.alignment.toUpperCase()}
+                {getAlignmentLabel(role.alignment)}
               </Text>
             </View>
           );

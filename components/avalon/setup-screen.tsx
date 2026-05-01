@@ -9,7 +9,7 @@ import {
   SectionTitle,
   SegmentButton,
 } from '@/components/avalon/ui';
-import { getRole, type PlayerCount } from '@/constants/avalon';
+import { getAlignmentLabel, getRole, type PlayerCount } from '@/constants/avalon';
 import type { AvalonGameController } from '@/hooks/use-avalon-game';
 
 const PLAYER_COUNT_OPTIONS: PlayerCount[] = [5, 6, 7, 8, 9];
@@ -85,7 +85,7 @@ export function SetupScreen({ controller }: { controller: AvalonGameController }
                     styles.roleAlignment,
                     role.alignment === 'good' ? styles.goodText : styles.evilText,
                   ]}>
-                  {role.alignment.toUpperCase()}
+                  {getAlignmentLabel(role.alignment)}
                 </Text>
               </View>
             );

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ImageBackground, Modal, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 
 import { styles } from '@/components/avalon/styles';
-import { getRole, type RoleId } from '@/constants/avalon';
+import { getAlignmentLabel, getRole, type RoleId } from '@/constants/avalon';
 
 const introBackground = require('../../assets/images/icon.png');
 
@@ -15,15 +15,15 @@ const RULE_ITEMS = [
   },
   {
     title: 'Mỗi vòng chơi',
-    body: 'Đội trưởng chọn đội thực hiện nhiệm vụ. Tất cả người chơi bỏ phiếu đồng ý hoặc từ chối đội hình đó.',
+    body: 'Một đội trưởng được chỉ định ngẫu nhiên. Đội trưởng sẽ chọn đội thực hiện nhiệm vụ. Tất cả người chơi bỏ phiếu Chấp nhận hoặc Từ chối đội hình đó. Nếu đa số phiếu là Chấp nhận thì đội sẽ được thông qua, ngược lại, quyền đội trưởng sẽ được dời sang người kế tiếp. Nếu đội bị Từ chối 5 lần liên tiếp thì phe Ác thắng.',
   },
   {
     title: 'Nhiệm vụ',
-    body: 'Nếu đội được thông qua, các thành viên trong đội thực hiện nhiệm vụ bằng cách bí mật chọn 1 trong 2 lá: Thành công hoặc Thất bại (Lưu ý: phe Thiện chỉ được chọn Thành công, phe Ác được lựa chọn 1 trong 2 lá).',
+    body: 'Nếu đội được thông qua, các thành viên trong đội thực hiện nhiệm vụ bằng cách bí mật chọn 1 trong 2 lá: Thành công hoặc Thất bại (Lưu ý: phe Thiện chỉ được chọn Thành công, phe Ác được lựa chọn 1 trong 2 lá). Nhiệm vụ hoàn thành khi không có lá Thất bại nào được chọn. Trong các ván có từ 7 người chơi trở lên, tại nhiệm vụ thứ 4 yêu cầu ít nhất phải có hai thẻ Thất bại mới được coi là nhiệm vụ thất bại.',
   },
   {
-    title: 'Các vai trò',
-    body: 'Mỗi người chơi sẽ được xem vai trò riêng trước khi bắt đầu ván.',
+    title: 'Các nhân vật trong trò chơi',
+    body: 'Các nhân vật sẽ được chia thành 2 phe: Phe Thiện và Phe Ác. Dưới đây là các vai trò ở từng phe.',
     roles: SECRET_ROLE_IDS,
   },
 ];
@@ -112,7 +112,7 @@ export function IntroScreen({ onStart }: { onStart: () => void }) {
                                   styles.rulesRoleTeam,
                                   role.alignment === 'good' ? styles.rulesRoleTeamGood : styles.rulesRoleTeamEvil,
                                 ]}>
-                                {role.alignment === 'good' ? 'Phe Thiện' : 'Phe Ác'}
+                                {getAlignmentLabel(role.alignment)}
                               </Text>
                             </View>
                             <Text style={styles.rulesRoleBody}>{role.summary}</Text>

@@ -63,7 +63,7 @@ export function GameScreen({ controller }: { controller: AvalonGameController })
 
       {!isRoleRevealPhase && game.questHistory.length > 0 && (
         <Card>
-          <SectionTitle title="Quest Log" body="Lịch sử làm nhiệm vụ." />
+          <SectionTitle title="Lịch sử làm nhiệm vụ" body="" />
           <View style={styles.stack}>
             {game.questHistory.map((quest) => (
               <View key={quest.questNumber} style={styles.logRow}>
@@ -77,7 +77,7 @@ export function GameScreen({ controller }: { controller: AvalonGameController })
                     {quest.outcome === 'success' ? 'THÀNH CÔNG' : 'THẤT BẠI'}
                   </Text>
                 </View>
-                <Text style={styles.logBody}>{`Team (${quest.teamSize}): ${quest.team.join(', ')}`}</Text>
+                <Text style={styles.logBody}>{`Đội hình (${quest.teamSize}): ${quest.team.join(', ')}`}</Text>
                 <Text style={styles.logBody}>{`Số lá thất bại: ${quest.failCount}`}</Text>
               </View>
             ))}

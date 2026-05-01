@@ -150,6 +150,10 @@ export function getAlignment(roleId: RoleId) {
   return ROLE_DEFINITIONS[roleId].alignment;
 }
 
+export function getAlignmentLabel(alignment: Alignment) {
+  return alignment === 'good' ? 'Phe Thiện' : 'Phe Ác';
+}
+
 export function getPlayerBrief(player: GamePlayer, players: GamePlayer[]) {
   const role = getRole(player.roleId);
   const intel: string[] = [];
@@ -183,7 +187,7 @@ export function getPlayerBrief(player: GamePlayer, players: GamePlayer[]) {
         getAlignment(candidate.roleId) === 'evil'
     );
 
-    intel.push(allies.length ? `Đồng đội chung phe Ác: ${allies.map((ally) => ally.name).join(', ')}` : 'Bạn là Evil duy nhất.');
+    intel.push(allies.length ? `Đồng đội chung phe Ác: ${allies.map((ally) => ally.name).join(', ')}` : 'Bạn là người duy nhất thuộc phe Ác.');
   }
 
   if (player.roleId === 'mordred') {
